@@ -9,7 +9,6 @@ from urllib.parse import urljoin
 base_url = "https://download.file-hunter.com/Music/VGM/"
 
 # Retrieve the page
-
 headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0 Safari/537.36"
 }
@@ -23,6 +22,9 @@ if response.status_code != 200:
 zip_links = re.findall(r'"([^"]+\.zip)"', response.text)
 print(f"Found {len(zip_links)} zip files.")
 
+# Create path for files
+os.makedirs("vgm", exist_ok=True)
+
 # Loop over each zip link and download the file
 for link in zip_links:
     # Create an absolute URL
@@ -34,7 +36,7 @@ for link in zip_links:
     if zip_response.status_code == 200:
         # Extract the filename from the URL
         filename = os.path.basename(link)
-        with open(filename, 'wb') as f:
+        with open(os.path.join("vgm", filename), 'wb') as f:
             f.write(zip_response.content)
         print(f"Saved {filename}")
     else:
