@@ -1,5 +1,11 @@
 # Download some sample PSG VGM files to create input samples.
 
+# Prompt:
+# write me a small python to crawl the url 
+# https://download.file-hunter.com/Music/VGM/ 
+# and retrieve all zip files from there, 
+# these zips contain vgm musics with the registers. use requests.
+
 import requests
 import re
 import os
